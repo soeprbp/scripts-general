@@ -1,0 +1,41 @@
+{
+  "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "$connections": {
+      "defaultValue": {},
+      "type": "Object"
+    }
+  },
+  "triggers": {
+    "Recurrence": {
+      "type": "Recurrence",
+      "recurrence": {
+        "frequency": "Month",
+        "interval": 2
+      }
+    }
+  },
+  "actions": {
+    "Post_message_in_Teams_channel": {
+      "type": "ApiConnection",
+      "inputs": {
+        "host": {
+          "connection": {
+            "name": "@parameters('$connections')['teams']['connectionId']"
+          }
+        },
+        "method": "post",
+        "path": "/v3/conversations/@{encodeURIComponent('CHANNEL_ID')}/activities",
+        "body": {
+          "type": "message",
+          "text": "🔔 **Bi‑Monthly Reminder**\n\nThis is your reminder to update the inventory database in **TrueCommerce** for **Lippert**.\n\n• Verify SKUs and descriptions\n• Confirm current inventory data is synced\n• Address any missing or outdated items\n\n_(Automated reminder – runs every 2 months)_"
+        }
+      },
+      "runAfter": {},
+      "parameters": {
+        "$connections": {
+          "value": {
+            "teams": {
+              "connectionId": "/providers/Microsoft.PowerApps/apis/shared_teams",
+              "connectionName": "shared_teams",

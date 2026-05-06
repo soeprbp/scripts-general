@@ -1,0 +1,6 @@
+data/
+build/
+.vs/
+*.json
+*.log
+*.exe

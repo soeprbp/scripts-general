@@ -1,0 +1,7 @@
+{
+    "email": "soperbp@welchpkg.com",
+    "password": "Pow10ermad!",
+    "baseUrl": "https://api.onupkeep.com/api/v2",
+    "lookbackDays": 730,
+    "outputDir": "./web"
+}
